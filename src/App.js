@@ -1,23 +1,65 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Employee from './component/Employee';
+import { useState } from 'react';
 function App() {
+  const [role, setRole] = useState('intern');
+ const work = true;
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {work ? (
+         <>
+           <input type="text"
+          onChange={(e) => {
+            console.log(e.target.value);
+            setRole(e.target.value);
+          }}
+         />
+         <div className="flex flex-wrap justify-center">
+        <Employee
+         name = "paschal"
+          role={role}
+           img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"
+           />
+         <Employee
+         name = "paschal"
+          role={role}
+           img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"
+           />
+             <Employee
+         name = "paschal"
+          role={role}
+           img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"
+           />
+             <Employee
+         name = "paschal"
+          role={role}
+           img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"
+           />
+             <Employee
+         name = "paschal"
+          role={role}
+           img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"
+           />
+             <Employee
+         name = "paschal"
+          role={role}
+           img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"
+           />
+             <Employee
+         name = "paschal"
+          role={role}
+           img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"
+           />
+            <Employee
+         name = "paschal"
+          role={role}
+           img="https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg"
+           />
+        </div> 
+        </>
+        ) : (
+          <p>not employed</p>
+        )}
     </div>
   );
 }

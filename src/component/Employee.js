@@ -14,9 +14,7 @@ return(
           </p>
         </div>
            
-           <EditEmployee/>
-
-       
+          {props.editEmployee}
       </div>
     </div>
 );

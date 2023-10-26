@@ -2,39 +2,76 @@ import './App.css';
 import Employee from './component/Employee';
 import { useState } from 'react';
 import {v4 as uuidv4} from 'uuid';
+import AddEmployee from './component/AddEmployee ';
+import EditEmployee from './component/EditEmployee';
 function App() {
   const [role, setRole] = useState('intern');
   const [employee, setEmployee] = useState(
     [
-      { name: 'Paschal',
+      { 
+        id: 1,
+        name: 'Paschal',
        role: 'engineer',
         img: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg" 
       },
-      { name: 'Leo',
+      { 
+        id: 2,
+        name: 'Leo',
        role: 'manager',
         img: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg" 
       },
-      { name: 'James',
+      { 
+        id: 3,
+        name: 'James',
        role: 'Frontend Dev',
         img: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg" 
       },
-      { name: 'John',
+      { 
+        id: 4,
+        name: 'John',
        role: 'Backend Dev',
         img: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg" 
       },
-      { name: 'Samuel',
+      { 
+        id: 5,
+        name: 'Samuel',
        role: 'Mobile Dev',
         img: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg" 
       },
-      { name: 'Peter',
+      { 
+        id: 6,
+        name: 'Peter',
        role: 'Product Mnager',
         img: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg" 
-      },{ name: 'Samson',
+      },{
+        id: 7, 
+        name: 'Samson',
       role: 'UI/UX',
        img: "https://images.pexels.com/photos/3831645/pexels-photo-3831645.jpeg" 
      }
     ]
-  )
+  );
+
+     function updateEmployee(id, newName, newRole){
+      const updatedEmployee = employee.map((employee) => {
+        if (id == employee.id) {
+          return{...employee, name: newName, role: newRole};
+        }
+        return employee;
+      });
+      setEmployee(updatedEmployee);
+     }
+
+     function newEmployee(name, role, img){
+      const newEmployee = {
+        id: uuidv4(),
+        name: name,
+        role: role,
+        img: img,
+      }
+      setEmployee([...employee, newEmployee])
+     }
+  
  const work = true;
   return (
     <div className="App">
@@ -48,14 +85,25 @@ function App() {
          />
          <div className="flex flex-wrap justify-center">
         {employee.map((employee) => {
-             return( <Employee 
-              key={uuidv4()}
+          const editEmployee =  <EditEmployee 
+          id={employee.id}
+          name={employee.name} 
+          role={employee.role} 
+          updateEmployee={updateEmployee}/>
+             return( 
+             <Employee 
+              key={employee.id}
+              id={employee.id}
               name={employee.name} 
               role={employee.role} 
-              img={employee.img}/>
-             );
+              img={employee.img}
+              editEmployee={editEmployee}
+              />
+             
+             )
         })}
         </div> 
+        <AddEmployee newEmployee={newEmployee}/>
         </>
         ) : (
           <p>not employed</p>

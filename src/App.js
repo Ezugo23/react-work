@@ -6,6 +6,7 @@ import AddEmployee from './component/AddEmployee ';
 import EditEmployee from './component/EditEmployee';
 import Header from './component/Header';
 import Employees from './pages/Employees';
+import Dictionary from './component/Dictinary'
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
      <Header>
             <Routes>
                 <Route path='/employees' element={<Employees/>} />
+                <Route path="/dictionary" element={<Dictionary/>}/>
             </Routes>
       </Header>
             </BrowserRouter>

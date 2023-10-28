@@ -1,12 +1,9 @@
 import './App.css';
-import Employee from './component/Employee';
-import { useState } from 'react';
-import {v4 as uuidv4} from 'uuid';
-import AddEmployee from './component/AddEmployee ';
-import EditEmployee from './component/EditEmployee';
 import Header from './component/Header';
 import Employees from './pages/Employees';
-import Dictionary from './component/Dictinary'
+import Dictionary from './pages/Dictinary';
+import Definition from './pages/Definition';
+import NotFound from './component/NotFound';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 function App() {
   return (
@@ -15,6 +12,9 @@ function App() {
             <Routes>
                 <Route path='/employees' element={<Employees/>} />
                 <Route path="/dictionary" element={<Dictionary/>}/>
+                <Route path="/dictionary/:search" element={<Definition/>}/>
+                <Route path="/404" element={<NotFound/>}/>
+                <Route path="*" element={<NotFound/>}/>
             </Routes>
       </Header>
             </BrowserRouter>

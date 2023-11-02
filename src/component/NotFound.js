@@ -1,3 +1,5 @@
+
 export default function NotFound() {
-  return <p>The page you are looking for was not found</p>;
+ // const id = props.id;
+  return //<p>The page with the id was not found</p>;
 }

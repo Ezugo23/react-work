@@ -1,47 +1,28 @@
 import {useState, useEffect} from 'react';
-import {useParams, useNavigate, Link} from 'react-router-dom';
+import {useParams, useNavigate, Link, useLocation} from 'react-router-dom';
 import NotFound from '../component/NotFound'
 import {v4 as uuidv4} from 'uuid';
 import DefinitionSearch from '../component/DefinitionSearch';
+import useFetch from '../hooks/UseFetch';
 
 export default function Definition() {
-    const [word, setWord] = useState();
-    const [notFound, setNotFound] = useState(false);
-    const [error, setError] = useState(false)
+    //const [word, setWord] = useState();
+    //const [notFound, setNotFound] = useState(false);
+    //const [error, setError] = useState(false)
     let {search} = useParams();
-    const navigate = useNavigate();
-  
-    useEffect(() => {
-      //const url = 'https://httpstat.us/501';
-      const url = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + search;
-      fetch(url)
-        .then((response) => {
-          //console.log(response.status);
-          if (response.status === 404){
-            setNotFound(true);
-        } else if (response.status === 401){
-          navigate('/login')
-        }else if (response.status === 500){
-          setError(true)
-        }
-        if(!response.ok){
-          setError(true)
 
-          throw new Error('Something went wrong');
-        }
-          return response.json()
-        })
-        .then((data) => {
-          if (data[0] && data[0].meanings) {
-            setWord(data[0].meanings);
-          } 
-        })
-         .catch((e) => {
-          console.log(e.message);
-         });
-    }, []);
 
-    if (notFound === true){
+     //const navigate = useNavigate();
+     //const location = useLocation();
+    const {request, data: [{meanings: word}] = [{}], errorStatus} = useFetch(
+      'https://api.dictionaryapi.dev/api/v2/entries/en/' + search
+    ); 
+
+      useEffect(() => {
+        request();
+      }, [])
+
+    if (errorStatus === false){
       return (
           <>
                <NotFound/>
@@ -50,7 +31,7 @@ export default function Definition() {
       );
     }
 
-    if (error === true){
+    if (errorStatus){
       return (
           <>
               <p>Something went wrong try again</p>
@@ -59,6 +40,7 @@ export default function Definition() {
       );
     }
   
+   
     return (
       <>
       {word ? (
